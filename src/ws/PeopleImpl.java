@@ -5,7 +5,6 @@ import model.ActivitySelection;
 import model.Goal;
 import model.HealthMeasure;
 import model.HealthMeasureHistory;
-import model.Motivation;
 import model.Person;
 import java.net.URI;
 import java.util.List;
@@ -24,15 +23,13 @@ import org.glassfish.jersey.client.ClientConfig;
 public class PeopleImpl implements People {
 	
 	private static URI getEx1BaseURI() {
-		//return UriBuilder.fromUri("http://localhost:8080/introsde.storage-service/api").build();
-		return UriBuilder.fromUri("https://shrouded-refuge-42685.herokuapp.com/api").build();
+		return UriBuilder.fromUri("https://shrouded-refuge-42685.herokuapp.com/storage").build();
 	}
 	
 	private static URI getEx2BaseURI() {
-		//return UriBuilder.fromUri("http://localhost:8080/introsde.business-logic-service/api").build();
-		return UriBuilder.fromUri("https://safe-ravine-27770.herokuapp.com/api").build();
+		return UriBuilder.fromUri("https://safe-ravine-27770.herokuapp.com/blogic").build();
 	}
-
+	
 	@Override
 	public Person getPersonById(int idPerson) {
 		System.out.println("Getting Person's information identified by idPerson = " + idPerson + "...");
@@ -181,18 +178,4 @@ public class PeopleImpl implements People {
 		}
 		return null;
 	}
-
-	@Override
-	public Motivation getMotivation(int idPerson) {
-		ClientConfig clientConfig = new ClientConfig();
-		Client client = ClientBuilder.newClient(clientConfig);
-		WebTarget service = client.target(getEx2BaseURI()).path("person").path(String.valueOf(idPerson)).path("motivation");
-		Response response = service.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).get();
-		int httpStatus = response.getStatus();
-		if (httpStatus == 200) {
-			Motivation motivation = response.readEntity(Motivation.class);
-			return motivation;
-		}
-		return null;
-	}	
 }

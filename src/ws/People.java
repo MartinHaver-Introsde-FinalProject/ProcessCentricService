@@ -12,7 +12,6 @@ import model.Activity;
 import model.ActivitySelection;
 import model.Goal;
 import model.HealthMeasureHistory;
-import model.Motivation;
 import model.Person;
 
 @WebService
@@ -95,12 +94,4 @@ public interface People {
 	@WebMethod(operationName = "createNewGoal")
 	@WebResult(name = "personResult")
 	public Person createNewGoal(@WebParam(name = "idPerson") int idPerson);
-	
-	/*
-	 * Getting motivating quote.
-	 */
-	
-	@WebMethod(operationName = "getMotivation")
-	@WebResult(name = "motivationResult")
-	public Motivation getMotivation(@WebParam(name = "idPerson") int idPerson);
 }
